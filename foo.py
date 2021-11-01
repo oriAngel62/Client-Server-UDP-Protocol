@@ -1,7 +1,5 @@
 from socket import socket, AF_INET, SOCK_DGRAM
-import sys
-import random
-import traceback
+import sys, random, traceback
 from datetime import datetime
 from threading import Thread
 from time import sleep
@@ -12,9 +10,8 @@ ALICE_PORT = int(sys.argv[3])
 ALICE_ADDR = (ALICE_IP, ALICE_PORT)
 MODE = int(sys.argv[4])
 
-
 s = socket(AF_INET, SOCK_DGRAM)
-s.bind(('', MY_PORT))
+s.bind(('', 2000))
 
 
 def send(data, addr):
@@ -41,11 +38,7 @@ DROP_RATE = 100
 DELAY_RATE = 100
 
 if MODE == 1:
-    f = open('a.txt', 'r')
-    file_contents = f.read()
-    print(file_contents)
-    f.close()
-
+    print('Playing nice')
 
 if (MODE == 2) or (MODE == 4):
     DROP_RATE = random.randrange(99)
@@ -54,7 +47,6 @@ if (MODE == 2) or (MODE == 4):
 if (MODE == 3) or (MODE == 4):
     DELAY_RATE = random.randrange(100)
     print(f'Delaying {100-DELAY_RATE}%')
-
 
 data, BOB_ADDR = s.recvfrom(101)
 addr = BOB_ADDR
@@ -69,7 +61,10 @@ while True:
             delay = random.randrange(100)
             if (delay > DELAY_RATE):
                 print(f'Good night.... {delay} {DELAY_RATE}')
-                t = Thread(target=delayed, args=(data, addr, ))
+                t = Thread(target=delayed, args=(
+                    data,
+                    addr,
+                ))
                 t.start()
             else:
                 print(f'Yay, no sleep.... {delay} {DELAY_RATE}')
