@@ -8,6 +8,6 @@ while True:
     # s.settimeout(8.0)
     data, addr = s.recvfrom(1024)
     # sock.settimeout(None)
-    print(len(data))
+    # print(len(data))
     print(str(data), addr)
     s.sendto(data, addr)
