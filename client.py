@@ -18,15 +18,16 @@ if len(stringFile) > 50000:
     print("file is to big")
 else:
     print(len(stringFile))
-
     listChuncks = []
     for i in range(0, len(stringFile), chunckSize):
         listChuncks.append(stringFile[i:i + chunckSize])
     #send the chuncks of data to foo
-    for i in range(0, len(listChuncks) - 1, 1):
-        s.sendto(listChuncks[i], (FOO_IP, FOO_PORT))
+    for chuncks in listChuncks:
+        s.sendto(chuncks, (FOO_IP, FOO_PORT))
+        print(len(listChuncks[1]))
         # s.settimeout(8.0)
         data, addr = s.recvfrom(1024)
+        print(data)
 
 f.close()
 s.close()
