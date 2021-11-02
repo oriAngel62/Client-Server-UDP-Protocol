@@ -11,7 +11,7 @@ ALICE_ADDR = (ALICE_IP, ALICE_PORT)
 MODE = int(sys.argv[4])
 
 s = socket(AF_INET, SOCK_DGRAM)
-s.bind(('', 2000))
+s.bind(('', MY_PORT))
 
 
 def send(data, addr):
