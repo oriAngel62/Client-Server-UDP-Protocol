@@ -24,10 +24,8 @@ else:
     #send the chuncks of data to foo
     for chuncks in listChuncks:
         s.sendto(chuncks, (FOO_IP, FOO_PORT))
-        print(len(listChuncks[1]))
+        # print(len(listChuncks[1]))
         # s.settimeout(8.0)
         data, addr = s.recvfrom(1024)
-        print(data)
-
 f.close()
 s.close()
