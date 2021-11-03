@@ -37,11 +37,8 @@ else:
                     (FOO_IP, FOO_PORT))
                 data, addr = s.recvfrom(1024)
                 break
-            #problem with sending
-            except socket.error:
-                quit()
             except socket.timeout:
                 continue
         packageNum = packageNum + 1
-        f.close()
-        s.close()
+f.close()
+s.close()

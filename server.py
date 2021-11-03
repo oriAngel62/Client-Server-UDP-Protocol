@@ -13,7 +13,4 @@ while True:
     if data not in setOfChuncks:
         print(data[3:].decode(), end='')
         setOfChuncks.add(data)
-    try:
-        s.sendto(data, addr)
-    except socket.error:
-        quit()
+    s.sendto(data, addr)
