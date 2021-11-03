@@ -1,25 +1,19 @@
-from datetime import date
 import socket
 import sys
-
-SERVER_PORT = int(sys.argv[1])
+try:
+    SERVER_PORT = int(sys.argv[1])
+except:
+    quit()
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind(('', SERVER_PORT))
-# s.settimeout(0.5)
-# while True:
-#     try:
-#         data, addr = s.recvfrom(1024)
-#         print(data[:3].decode())
-#         print(str(data), addr)
-#         # s.settimeout(8.0)
-#         while True:
-#             s.sendto(b"y", addr)
-#             break
-#     except socket.timeout:
-#         continue
-
+setOfChuncks = set()
+lastPackage = ''
 while True:
     data, addr = s.recvfrom(1024)
-    print(data[:3].decode())
-    print(str(data), addr)
-    s.sendto(data, addr)
+    if data not in setOfChuncks:
+        print(data[3:].decode(), end='')
+        setOfChuncks.add(data)
+    try:
+        s.sendto(data, addr)
+    except socket.error:
+        quit()
