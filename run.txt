@@ -1,0 +1,7 @@
+run:
+port of server:
+python3 server.py 1001
+port of client and server (server in the middle mode 4)
+python3 foo.py 1000 127.0.0.1 1001 4
+port of client and ip
+python3 client.py 1000 127.0.0.1 a.txt
